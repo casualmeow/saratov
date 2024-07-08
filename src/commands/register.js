@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const {createUser} = require('../utility/crud');
 
 module.exports = {
     name: 'register',
@@ -10,7 +10,7 @@ module.exports = {
             return message.channel.send('You are already registered.');
         }
 
-        const newUser = new User({
+        const createUser = new User({
             discordId: message.author.id,
             username: message.author.username,
             coins: 100,

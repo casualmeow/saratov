@@ -6,9 +6,10 @@ module.exports = {
     async execute(message, args) {
         try {
             const response = await axios.get('https://wzhxycl.fun/random');
-            message.channel.send(JSON.stringify(response.data));
+            const text = response.data.text;
+            message.channel.send(text);
         } catch (error) {
-            console.error(error);
+            console.error(`nasral v ${error}`);
         }
     }
 };
