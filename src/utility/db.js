@@ -1,21 +1,11 @@
-const sqlite3 = require('sqlite3').verbose();
+const Sequelize = require('sequelize');
 require('dotenv').config();
-const dbName = process.env.DB_NAME;
 
-let db = new sqlite3.Database(dbName, err => {
-    if (err){
-        console.log(err);
-    }
-    else {
-        console.log('Database Connected!');
-        db.run('CREATE TABLE IF NOT EXISTS items (username STRING, user_id INTEGER PRIMARY KEY AUTOINCREMENT, discordId STRING, register_status BOOLEAN, coins NUMBER, inventory ARRAY)', (err) => {
-        if (err) {
-            console.error(err.message);
-        } else {
-            console.log('Database created!');
-        }
-    })
-    }
-})
+const sequelize = new Sequelize('database', 'username', 'password', {
+    dialect: 'sqlite',
+    host: 'localhost',
+    storage: process.env.DATABASE_DIR,
+    logging: false
+});
 
-module.exports = db;
+module.exports = sequelize;

@@ -1,6 +1,5 @@
 require('dotenv').config();
 const { Client, GatewayIntentBits } = require('discord.js');
-const mongoose = require('mongoose');
 const { prefix } = require('./config/config.json');
 const commandHandler = require('./handler/commandHandler');
 const eventHandler = require("./handler/commandHandler");
@@ -14,7 +13,6 @@ const client = new Client({
     ],
 });
 
-//mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true });  sqlite
 
 client.on('ready', (c) => {
     console.log(`${c.user.tag} is online`);

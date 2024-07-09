@@ -9,7 +9,6 @@ module.exports.handle = (message) => {
         const commandFile = require(`../commands/${command}.js`);
         commandFile.execute(message, args);
     } catch (error) {
-        console.error(`Command ${command} not found`);
         message.channel.send(`Command ${command} not found`);
     }
 };
