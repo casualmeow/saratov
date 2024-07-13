@@ -2,7 +2,9 @@ require('dotenv').config();
 const { Client, GatewayIntentBits } = require('discord.js');
 const { prefix } = require('./config/config.json');
 const commandHandler = require('./handler/commandHandler');
-const eventHandler = require("./handler/commandHandler");
+const eventHandler = require('./handler/eventHandler');
+const sequelize = require('./utility/db');
+const User = require('./roles/user');
 
 const client = new Client({
     intents: [
@@ -18,10 +20,11 @@ client.on('ready', (c) => {
     console.log(`${c.user.tag} is online`);
 })
 
-client.on('messageCreate', (message) => {
+eventHandler(client);
+
+client.on('messageCreate', async (message) => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
     commandHandler.handle(message);
 });
-eventHandler.handle(message);
 
 client.login(process.env.TOKEN);

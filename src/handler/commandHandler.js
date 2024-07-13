@@ -1,7 +1,10 @@
 const fs = require('fs');
 const { prefix } = require('../config/config.json');
+const { registerUser } = require('../services/registerService');
 
-module.exports.handle = (message) => {
+module.exports.handle = async (message) => {
+    await registerUser(message);
+
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
 
